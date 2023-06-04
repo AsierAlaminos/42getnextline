@@ -19,32 +19,35 @@
 #endif
 
 char	*get_end_line(char *text);
-int		ft_strlen(char *str);
+int	ft_strlen(char *str);
 
 char	*get_next_line(int fd)
 {
 	char	*readed;
+	char	*str;
 	int		len_readed;
 
 	if (fd == 0 || BUFFER_SIZE <= 0)
 		return (0);
 	readed = malloc(sizeof(char) * BUFFER_SIZE);
-	read(fd, readed, BUFFER_SIZE);
 	len_readed = ft_strlen(readed);
+	if (BUFFER_SIZE < len_readed)
+		read(fd, readed, BUFFER_SIZE);
 	read(fd, readed, len_readed);
 	if (readed == 0)
 		return (0);
-	return (get_end_line(readed));
+	str = get_end_line(readed);
+	return (str);
 }
 
 int	main(void)
 {
 	char	*str;
 	int		i;
-	int	fd = open("./test", O_RDONLY);
+	int		fd = open("test", O_RDONLY);
 
 	i = 0;
-	while (i != 4){
+	while (i < 4){
 		str = get_next_line(fd);
 		printf("texto: %s\n", str);
 		++i;
