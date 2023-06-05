@@ -18,8 +18,8 @@
 	#define BUFFER_SIZE 0
 #endif
 
-char	*get_end_line(char *text);
-int	ft_strlen(char *str);
+char	*get_end_line(char *text, int size);
+int	ft_strlen(char *str, int max_size);
 
 char	*get_next_line(int fd)
 {
@@ -30,14 +30,12 @@ char	*get_next_line(int fd)
 	if (fd == 0 || BUFFER_SIZE <= 0)
 		return (0);
 	readed = malloc(sizeof(char) * BUFFER_SIZE);
-	len_readed = ft_strlen(readed);
-	if (BUFFER_SIZE < len_readed)
-		read(fd, readed, BUFFER_SIZE);
-	read(fd, readed, len_readed);
+	len_readed = ft_strlen(readed, BUFFER_SIZE);
+	str = malloc(sizeof(char) * len_readed);
+	read(fd, str, len_readed);
 	if (readed == 0)
 		return (0);
-	str = get_end_line(readed);
-	return (str);
+	return (get_end_line(str, len_readed));
 }
 
 int	main(void)
