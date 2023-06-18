@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmus <asmus@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:06:07 by asmus             #+#    #+#             */
-/*   Updated: 2023/06/05 13:06:24 by asmus            ###   ########.fr       */
+/*   Updated: 2023/06/13 13:27:03 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,3 +16,5 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000
 # endif
+
+
