@@ -10,24 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
-	char				*str;
+	static char	*str;
+	char		*line;
 
-	if (fd == 0 || BUFFER_SIZE <= 0)
+	if (fd == 0 || BUFFER_SIZE < 0)
 		return (0);
-	str = malloc(sizeof(char) * BUFFER_SIZE);
-	if (str == 0)
-		return (0);
-	return (get_end_line(str, fd));
+	str = reader(str, fd);
+	if (!str)
+		return (NULL);
+	line = get_end_line(str);
+	free(str);
+	return (line);
 }
-/*
+
 int	main(void)
 {
 	char	*str;
@@ -36,9 +39,10 @@ int	main(void)
 
 	i = 0;
 	while (i < 15){
+		printf("i: %d\n", i);
 		str = get_next_line(fd);
 		printf("texto: %s\n", str);
 		++i;
 	}
 	return (0);
-}*/
+}
