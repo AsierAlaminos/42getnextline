@@ -45,31 +45,6 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*get_end_line(char *text)
-{
-	int		i;
-	char	*str;
-
-	i = 0;
-	while (text[i] != '\n' && text[i] != '\0')
-		++i;
-	str = malloc(sizeof(char) * (i + 2));
-	i = 0;
-	while (text[i] != '\n' && text[i] != '\0')
-	{
-		printf("gel\n");
-		str[i] = text[i];
-		++i;
-	}
-	if (text[i] == '\n')
-	{
-		str[i] = text[i];
-		++i;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*pointer;
@@ -97,23 +72,25 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*reader(char *str, int fd)
 {
+	char	*lecture;
 	int		read_b;
-	char	*add;
+	int		line_counter;
 
-	printf("reader");
+	lecture = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
+	line_counter = 0;
 	read_b = 1;
-	add = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while (read_b != 0 && !ft_strchr(add, '\n'))
+	while (read_b != 0 && !ft_strchr(str, '\n') && BUFFER_SIZE > line_counter)
 	{
-		read_b = read(fd, add, BUFFER_SIZE);
+		read_b = read(fd, lecture, 1);
 		if (read_b == -1)
 		{
-			free(add);
+			free(lecture);
 			return (NULL);
 		}
-		add[read_b] = '\0';
-		str = ft_strjoin(str, add);
+		str = ft_strjoin(str, lecture);
+		line_counter += read_b;
 	}
-	free(add);
+	free(lecture);
+	str[line_counter] = '\0';
 	return (str);
 }

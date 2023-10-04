@@ -19,30 +19,29 @@
 char	*get_next_line(int fd)
 {
 	static char	*str;
-	char		*line;
 
-	if (fd == 0 || BUFFER_SIZE < 0)
+	str = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	str = reader(str, fd);
 	if (!str)
 		return (NULL);
-	line = get_end_line(str);
-	free(str);
-	return (line);
+	return (str);
 }
 
 int	main(void)
 {
 	char	*str;
 	int		i;
-	int		fd = open("test2", O_RDONLY);
+	int		fd = open("./test3", O_RDONLY);
 
 	i = 0;
-	while (i < 15){
+	while (i < 30){
 		printf("i: %d\n", i);
 		str = get_next_line(fd);
-		printf("texto: %s\n", str);
+		printf("texto: |%s|\n", str);
 		++i;
 	}
+	close(fd);
 	return (0);
 }

@@ -16,6 +16,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000
 # endif
+# include <stdlib.h>
 
 char	*get_next_line(int fd);
 char	*get_end_line(char *text);
