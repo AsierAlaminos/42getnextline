@@ -16,27 +16,55 @@
 #include <unistd.h>
 #include "get_next_line.h"
 
+char	*reader(char *str, int fd)
+{
+	char	*lecture;
+	int		read_b;
+
+	lecture = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
+	read_b = 1;
+	while (read_b != 0 && !ft_strchr(str, '\n'))
+	{
+		read_b = read(fd, lecture, BUFFER_SIZE);
+		if (read_b == -1)
+		{
+			free(lecture);
+			return (NULL);
+		}
+		str = ft_strjoin(str, lecture);
+	}
+	free(lecture);
+	return (str);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*str;
+	char		*linea;
 
+	printf("str: %s\n", str);
+	if (str != 0)
+	{
+		str = get_more(str);
+		linea = get_all_line(str);
+		return (linea);
+	}
 	str = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	str = reader(str, fd);
-	if (!str)
+	if (fd < 0 || BUFFER_SIZE <= 0 || !str)
 		return (NULL);
-	return (str);
+	str = reader(str, fd);
+	linea = get_all_line(str);
+	return (linea);
 }
 
 int	main(void)
 {
 	char	*str;
 	int		i;
-	int		fd = open("./test3", O_RDONLY);
+	int		fd = open("./test", O_RDONLY);
 
 	i = 0;
-	while (i < 30){
+	while (i < 10){
 		printf("i: %d\n", i);
 		str = get_next_line(fd);
 		printf("texto: |%s|\n", str);

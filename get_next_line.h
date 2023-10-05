@@ -19,10 +19,11 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
-char	*get_end_line(char *text);
+char	*reader(char *str, int fd);
+char	*get_all_line(char *str);
+char	*get_more(char *str);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*reader(char *str, int fd);
 size_t	ft_strlen(const char *s);
 
 #endif

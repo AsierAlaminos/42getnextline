@@ -51,6 +51,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
+	printf("ft_strjoin\n\ts1: %s\n", s2);
 	pointer = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (pointer == NULL)
 		return (NULL);
@@ -70,27 +71,39 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (pointer);
 }
 
-char	*reader(char *str, int fd)
+char	*get_all_line(char *str)
 {
-	char	*lecture;
-	int		read_b;
-	int		line_counter;
+	char	*temp;
+	int		i;
 
-	lecture = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
-	line_counter = 0;
-	read_b = 1;
-	while (read_b != 0 && !ft_strchr(str, '\n') && BUFFER_SIZE > line_counter)
+	i = 0;
+	temp = malloc(sizeof(char *) * BUFFER_SIZE + 1);
+	if (!temp)
+		return (NULL);
+	while (str[i] != '\n' && str[i] != '\0' && i < BUFFER_SIZE)
 	{
-		read_b = read(fd, lecture, 1);
-		if (read_b == -1)
-		{
-			free(lecture);
-			return (NULL);
-		}
-		str = ft_strjoin(str, lecture);
-		line_counter += read_b;
+		temp[i] = str[i];
+		i++;
 	}
-	free(lecture);
-	str[line_counter] = '\0';
-	return (str);
+	temp[i] = '\0';
+	return (temp);
+}
+
+char	*get_more(char *str)
+{
+	char	*temp;
+	int		i;
+
+	i = 0;
+	temp = malloc(sizeof(char *) * BUFFER_SIZE + 1);
+	while (str[i] != '\n' && str[i] != '\0')
+		i++;
+	if (str[i - 1] == '\0')
+		return (str);
+	i++;
+	printf("temp\n");
+	temp = ft_strjoin(temp, &str[i]);
+	printf("&str[%d]: %s\ntemp: %s\n", i, &str[i], temp);
+	temp[i] = '\0';
+	return (temp);
 }
