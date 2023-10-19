@@ -42,7 +42,6 @@ char	*get_next_line(int fd)
 	static char	*str;
 	char		*linea;
 
-	printf("str: %s\n", str);
 	if (str != 0)
 	{
 		str = get_more(str);
@@ -61,11 +60,11 @@ int	main(void)
 {
 	char	*str;
 	int		i;
-	int		fd = open("./test", O_RDONLY);
+	int		fd = open("./test5", O_RDONLY);
 
 	i = 0;
 	while (i < 10){
-		printf("i: %d\n", i);
+		printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
 		str = get_next_line(fd);
 		printf("texto: |%s|\n", str);
 		++i;

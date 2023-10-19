@@ -51,7 +51,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
-	printf("ft_strjoin\n\ts1: %s\n", s2);
 	pointer = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (pointer == NULL)
 		return (NULL);
@@ -78,7 +77,7 @@ char	*get_all_line(char *str)
 
 	i = 0;
 	temp = malloc(sizeof(char *) * BUFFER_SIZE + 1);
-	if (!temp)
+	if (!temp && !str)
 		return (NULL);
 	while (str[i] != '\n' && str[i] != '\0' && i < BUFFER_SIZE)
 	{
@@ -98,12 +97,9 @@ char	*get_more(char *str)
 	temp = malloc(sizeof(char *) * BUFFER_SIZE + 1);
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
-	if (str[i - 1] == '\0')
+	if (str[i] == '\0')
 		return (str);
 	i++;
-	printf("temp\n");
 	temp = ft_strjoin(temp, &str[i]);
-	printf("&str[%d]: %s\ntemp: %s\n", i, &str[i], temp);
-	temp[i] = '\0';
 	return (temp);
 }
