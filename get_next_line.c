@@ -42,20 +42,15 @@ char	*get_next_line(int fd)
 	static char	*str;
 	char		*linea;
 
-	if (str != 0)
-	{
-		str = get_more(str);
-		linea = get_all_line(str);
-		return (linea);
-	}
 	str = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
 	if (fd < 0 || BUFFER_SIZE <= 0 || !str)
 		return (NULL);
 	str = reader(str, fd);
 	linea = get_all_line(str);
+	str = get_more(str);
 	return (linea);
 }
-
+/*
 int	main(void)
 {
 	char	*str;
@@ -71,4 +66,4 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
-}
+}*/

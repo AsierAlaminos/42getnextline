@@ -92,6 +92,7 @@ char	*get_more(char *str)
 {
 	char	*temp;
 	int		i;
+	int		j;
 
 	i = 0;
 	temp = malloc(sizeof(char *) * BUFFER_SIZE + 1);
@@ -100,6 +101,9 @@ char	*get_more(char *str)
 	if (str[i] == '\0')
 		return (str);
 	i++;
-	temp = ft_strjoin(temp, &str[i]);
+	j = 0;
+	while (str[i] != '\0')
+		temp[j++] = str[i++];
+	free(str);
 	return (temp);
 }
