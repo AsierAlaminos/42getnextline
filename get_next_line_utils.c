@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:02:03 by aalamino          #+#    #+#             */
-/*   Updated: 2023/06/13 13:27:00 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:32:33 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,6 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*get_end_line(char *text)
-{
-	int		i;
-	char	*str;
-
-	i = 0;
-	while (text[i] != '\n' && text[i] != '\0')
-		++i;
-	str = malloc(sizeof(char) * (i + 2));
-	i = 0;
-	while (text[i] != '\n' && text[i] != '\0')
-	{
-		printf("gel\n");
-		str[i] = text[i];
-		++i;
-	}
-	if (text[i] == '\n')
-	{
-		str[i] = text[i];
-		++i;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*pointer;
@@ -95,25 +70,40 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (pointer);
 }
 
-char	*reader(char *str, int fd)
+char	*get_all_line(char *str)
 {
-	int		read_b;
-	char	*add;
+	char	*temp;
+	int		i;
 
-	printf("reader");
-	read_b = 1;
-	add = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while (read_b != 0 && !ft_strchr(add, '\n'))
+	i = 0;
+	temp = malloc(sizeof(char *) * BUFFER_SIZE + 1);
+	if (!temp && !str)
+		return (NULL);
+	while (str[i] != '\n' && str[i] != '\0')
 	{
-		read_b = read(fd, add, BUFFER_SIZE);
-		if (read_b == -1)
-		{
-			free(add);
-			return (NULL);
-		}
-		add[read_b] = '\0';
-		str = ft_strjoin(str, add);
+		temp[i] = str[i];
+		i++;
 	}
-	free(add);
-	return (str);
+	temp[i] = '\0';
+	return (temp);
+}
+
+char	*reduce_str(char *str)
+{
+	char	*temp;
+	int		i;
+	int		j;
+
+	i = 0;
+	temp = malloc(sizeof(char *) * BUFFER_SIZE + 1);
+	while (str[i] != '\n' && str[i] != '\0')
+		i++;
+	if (str[i] == '\0')
+		return (str);
+	i++;
+	j = 0;
+	while (str[i] != '\0')
+		temp[j++] = str[i++];
+	free(str);
+	return (temp);
 }
