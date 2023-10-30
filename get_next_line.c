@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:58:48 by aalamino          #+#    #+#             */
-/*   Updated: 2023/10/28 16:41:43 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:51:58 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ char	*reader(char *str, int fd)
 	char	*lecture;
 	int		read_b;
 
-	lecture = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
 	read_b = 1;
-	while (read_b != 0 && !ft_strchr(str, '\n'))
+	lecture = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
+	while (read_b != 0 && !ft_strchr(str, '\n') && !ft_strchr(str, '\0'))
 	{
 		read_b = read(fd, lecture, BUFFER_SIZE);
 		if (read_b == -1)
@@ -46,7 +46,7 @@ char	*get_next_line(int fd)
 	if (!str)
 		str = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
 	read_str = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
-	if (fd < 0 || BUFFER_SIZE <= 0 || !read_str)
+	if (fd < 0 || fd > 2 || BUFFER_SIZE <= 0 || !read_str || !str)
 		return (NULL);
 	if (str != NULL && !ft_strchr(str, '\n'))
 	{
@@ -58,18 +58,18 @@ char	*get_next_line(int fd)
 	free(read_str);
 	return (linea);
 }
-
+/*
 void leaks(void) { system("leaks -q gnl"); }
 
 int	main(void)
 {
 	char	*str;
 	int		i;
-	int		fd = open("./test5", O_RDONLY);
+	int		fd = open("./nl", O_RDWR);
 
 	atexit(leaks);
 	i = 0;
-	while (i < 8){
+	while (i < 15){
 		printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
 		str = get_next_line(fd);
 		printf("\ntexto: |%s|\n", str);
@@ -77,4 +77,4 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
-}
+}*/
