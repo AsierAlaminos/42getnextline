@@ -44,7 +44,7 @@ char	*get_next_line(int fd)
 	char		*linea;
 
 	if (!str)
-		str = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
+		str = (char *)(malloc(1));
 	read_str = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
 	if (fd < 0 || BUFFER_SIZE <= 0 || !read_str || !str)
 		return (NULL);
@@ -54,7 +54,9 @@ char	*get_next_line(int fd)
 		str = ft_strjoin(str, read_str);
 	}
 	linea = get_all_line(str);
+	printf("str_bf: |%s|\n", str);
 	str = reduce_str(str);
+	printf("linea: |%s|\nstr: |%s|\n", linea, str);
 	free(read_str);
 	return (linea);
 }
