@@ -22,8 +22,10 @@ char	*get_next_line(int fd);
 char	*reader(char *str, int fd);
 char	*get_all_line(char *str);
 char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 char	*reduce_str(char *str);
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif

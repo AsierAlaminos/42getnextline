@@ -34,6 +34,8 @@ char	*ft_strchr(const char *s, int c)
 	i = 0;
 	character = (char) c;
 	str = (char *) s;
+	if (!s)
+		return (NULL);
 	while (str[i] != '\0')
 	{
 		if (str[i] == character)
@@ -45,8 +47,9 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{ char	*pointer;
+char	*ft_strjoin(char *s1, char *s2)
+{ 
+	char	*pointer;
 	int		i;
 	int		j;
 
@@ -75,11 +78,16 @@ char	*get_all_line(char *str)
 	int		i;
 
 	i = 0;
-	while (str[i] != '\n' && str[i] == '\0')
+	if (!str)
+		return (NULL);
+	while (str[i] != '\n' && str[i] != '\0')
 		i++;
 	temp = (char *)malloc(i + 1);
-	if (!temp && !str)
+	if (!temp || str[i] == '\0')
+	{
+		free(temp);
 		return (NULL);
+	}
 	if (str[i] == '\n')
 		return (&str[i]);
 	while (str[i] != '\n' && str[i] != '\0')
