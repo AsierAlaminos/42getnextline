@@ -58,7 +58,7 @@ char	*get_next_line(int fd)
 	free(read_str);
 	return (linea);
 }
-
+/*
 void leaks(void) { system("leaks -q gnl"); }
 
 int	main(void)
@@ -77,4 +77,4 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
-}
+}*/
