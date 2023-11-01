@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:02:03 by aalamino          #+#    #+#             */
-/*   Updated: 2023/10/30 19:08:25 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:15:49 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*ft_strchr(const char *s, int c)
 	i = 0;
 	character = (char) c;
 	str = (char *) s;
+	if (!str)
+		printf("lll");
 	while (str[i] != '\0')
 	{
 		if (str[i] == character)
@@ -79,6 +81,8 @@ char	*get_all_line(char *str)
 	temp = malloc(sizeof(char *) * BUFFER_SIZE + 1);
 	if (!temp && !str)
 		return (NULL);
+	if (str[i] == '\n')
+		return (&str[i]);
 	while (str[i] != '\n' && str[i] != '\0')
 	{
 		temp[i] = str[i];
@@ -100,10 +104,13 @@ char	*reduce_str(char *str)
 		i++;
 	if (str[i] == '\0')
 		return (str);
+	if (str[i] == '\0' || (str[i] == '\n' && str[i + 1] == '\0'))
+		return (NULL);
 	i++;
 	j = 0;
 	while (str[i] != '\0')
 		temp[j++] = str[i++];
+	temp[j] = '\0';
 	free(str);
 	return (temp);
 }
