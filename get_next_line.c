@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:58:48 by aalamino          #+#    #+#             */
-/*   Updated: 2023/11/01 16:16:07 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:37:11 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	*reader(char *str, int fd)
 			return (NULL);
 		}
 		lecture[read_b] = '\0';
+		if (!lecture)
+			return (NULL);
 		str = ft_strjoin(str, lecture);
 	}
 	free(lecture);
@@ -77,12 +79,12 @@ char	*get_next_line(int fd)
 	if (!ft_strchr(str, '\n'))
 	{
 		read_str = reader(read_str, fd);
+		if (!read_str)
+			return (NULL);
 		str = ft_strjoin(str, read_str);
 	}
 	linea = get_all_line(str);
-	//printf("str_bf: |%s|\n", str);
 	str = reduce_str(str);
-	//printf("linea: |%s|\nstr: |%s|\n", linea, str);
 	free(read_str);
 	return (linea);
 }
@@ -91,17 +93,17 @@ void leaks(void) { system("leaks -q gnl"); }
 
 int	main(void)
 {
-	//char	*str;
+	char	*str;
 	int		i;
-	int		fd = open("./test5", O_RDWR);
+	int		fd = open("./41_no_nl", O_RDWR);
 
 	atexit(leaks);
 	i = 0;
 	while (i < 15){
-		//printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
-		//str = get_next_line(fd);
+		printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
+		str = get_next_line(fd);
 		get_next_line(fd);
-		//printf("\ntexto: |%s|\n", str);
+		printf("\ntexto: |%s|\n", str);
 		++i;
 	}
 	close(fd);

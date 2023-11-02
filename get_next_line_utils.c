@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:02:03 by aalamino          #+#    #+#             */
-/*   Updated: 2023/11/01 16:15:49 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:20:45 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_strchr(const char *s, int c)
 }
 
 char	*ft_strjoin(char *s1, char *s2)
-{ 
+{
 	char	*pointer;
 	int		i;
 	int		j;
@@ -76,10 +76,13 @@ char	*get_all_line(char *str)
 {
 	char	*temp;
 	int		i;
+	int		j;
 
 	i = 0;
 	if (!str)
 		return (NULL);
+	if (str[i] == '\n')
+		return (&str[i]);
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
 	temp = (char *)malloc(i + 1);
@@ -88,12 +91,11 @@ char	*get_all_line(char *str)
 		free(temp);
 		return (NULL);
 	}
-	if (str[i] == '\n')
-		return (&str[i]);
-	while (str[i] != '\n' && str[i] != '\0')
+	j = 0;
+	while (j < i)
 	{
-		temp[i] = str[i];
-		i++;
+		temp[j] = str[j];
+		j++;
 	}
 	temp[i] = '\0';
 	return (temp);
