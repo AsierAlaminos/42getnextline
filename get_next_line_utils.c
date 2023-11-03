@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:02:03 by aalamino          #+#    #+#             */
-/*   Updated: 2023/11/02 17:20:45 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/03 18:39:14 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*get_all_line(char *str)
 	int		j;
 
 	i = 0;
-	if (!str)
+	if (!str || str[i] == '\0')
 		return (NULL);
 	if (str[i] == '\n')
 		return (&str[i]);
@@ -89,16 +89,15 @@ char	*get_all_line(char *str)
 		i++;
 	temp = (char *)malloc(i + 1);
 	if (!temp)
-	{
-		free(temp);
 		return (NULL);
-	}
 	j = 0;
 	while (j < i)
 	{
 		temp[j] = str[j];
 		j++;
 	}
+	if (str[i] == '\n')
+		temp[i++] = '\n';
 	temp[i] = '\0';
 	return (temp);
 }
@@ -113,8 +112,8 @@ char	*reduce_str(char *str)
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
 	if (str[i] == '\0')
-		return (str);
-	if (str[i] == '\0' || (str[i] == '\n' && str[i + 1] == '\0'))
+		return (NULL);
+	if (str[0] == '\0' || (str[i] == '\n' && str[i + 1] == '\0'))
 		return (NULL);
 	temp = (char *)malloc(ft_strlen(str) - i + 1);
 	i++;

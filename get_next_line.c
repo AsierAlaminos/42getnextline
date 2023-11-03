@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:58:48 by aalamino          #+#    #+#             */
-/*   Updated: 2023/11/02 17:37:11 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/03 18:40:23 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,21 @@ char	*get_next_line(int fd)
 	return (linea);
 }
 
-//void leaks(void) { system("leaks -q gnl"); }
+void leaks(void) { system("leaks -q gnl"); }
 
 int	main(void)
 {
-	//char	*str;
+	char	*str;
 	int		i;
-	int		fd = open("./test5", O_RDWR);
+	int		fd = open("./empty", O_RDWR);
 
-	//atexit(leaks);
+	atexit(leaks);
 	i = 0;
-	while (i < 15){
+	while (i < 3){
 		//printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
-		//str = get_next_line(fd);
-		get_next_line(fd);
-		//printf("\ntexto: |%s|\n", str);
+		str = get_next_line(fd);
+		//get_next_line(fd);
+		printf("\ntexto: |%s|\n", str);
 		++i;
 	}
 	close(fd);
