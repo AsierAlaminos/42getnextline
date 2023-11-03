@@ -47,9 +47,9 @@ char	*reader(char *str, int fd)
 	int		read_b;
 
 	read_b = 1;
-	lecture = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
 	while (read_b != 0 && !ft_strchr(str, '\n'))
 	{
+		lecture = (char *)(malloc(sizeof(char) * (BUFFER_SIZE + 1)));
 		read_b = read(fd, lecture, BUFFER_SIZE);
 		if (read_b == -1)
 		{
@@ -61,7 +61,6 @@ char	*reader(char *str, int fd)
 			return (NULL);
 		str = ft_strjoin(str, lecture);
 	}
-	free(lecture);
 	return (str);
 }
 
@@ -85,25 +84,24 @@ char	*get_next_line(int fd)
 	}
 	linea = get_all_line(str);
 	str = reduce_str(str);
-	free(read_str);
 	return (linea);
 }
 
-void leaks(void) { system("leaks -q gnl"); }
+//void leaks(void) { system("leaks -q gnl"); }
 
 int	main(void)
 {
-	char	*str;
+	//char	*str;
 	int		i;
-	int		fd = open("./41_no_nl", O_RDWR);
+	int		fd = open("./test5", O_RDWR);
 
-	atexit(leaks);
+	//atexit(leaks);
 	i = 0;
 	while (i < 15){
-		printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
-		str = get_next_line(fd);
+		//printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
+		//str = get_next_line(fd);
 		get_next_line(fd);
-		printf("\ntexto: |%s|\n", str);
+		//printf("\ntexto: |%s|\n", str);
 		++i;
 	}
 	close(fd);
