@@ -69,6 +69,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		++j;
 	}
 	pointer[i + j] = '\0';
+	free(s1);
+	free(s2);
 	return (pointer);
 }
 
@@ -86,7 +88,7 @@ char	*get_all_line(char *str)
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
 	temp = (char *)malloc(i + 1);
-	if (!temp || str[i] == '\0')
+	if (!temp)
 	{
 		free(temp);
 		return (NULL);
