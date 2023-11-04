@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:58:48 by aalamino          #+#    #+#             */
-/*   Updated: 2023/11/03 18:40:23 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:44:00 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*reader(char *str, int fd)
 		if (!lecture)
 			return (NULL);
 		str = ft_strjoin(str, lecture);
+		free(lecture);
 	}
 	return (str);
 }
@@ -81,23 +82,26 @@ char	*get_next_line(int fd)
 		if (!read_str)
 			return (NULL);
 		str = ft_strjoin(str, read_str);
+		free(read_str);
 	}
 	linea = get_all_line(str);
 	str = reduce_str(str);
+	if (!str)
+		free(str);
 	return (linea);
 }
-
+/*
 void leaks(void) { system("leaks -q gnl"); }
 
 int	main(void)
 {
 	char	*str;
 	int		i;
-	int		fd = open("./empty", O_RDWR);
+	int		fd = open("./multiple_nl.txt", O_RDWR);
 
 	atexit(leaks);
 	i = 0;
-	while (i < 3){
+	while (i < 6){
 		//printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
 		str = get_next_line(fd);
 		//get_next_line(fd);
@@ -106,4 +110,4 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
-}
+}*/

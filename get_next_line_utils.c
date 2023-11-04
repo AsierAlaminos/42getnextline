@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:02:03 by aalamino          #+#    #+#             */
-/*   Updated: 2023/11/03 18:39:14 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:43:37 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	int		j;
 
+	if (!s1 || !s2)
+		return (NULL);
 	pointer = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!pointer)
 		return (NULL);
@@ -70,7 +72,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	pointer[i + j] = '\0';
 	free(s1);
-	free(s2);
 	return (pointer);
 }
 
@@ -83,11 +84,9 @@ char	*get_all_line(char *str)
 	i = 0;
 	if (!str || str[i] == '\0')
 		return (NULL);
-	if (str[i] == '\n')
-		return (&str[i]);
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
-	temp = (char *)malloc(i + 1);
+	temp = (char *)malloc(i + 2);
 	if (!temp)
 		return (NULL);
 	j = 0;
