@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:58:48 by aalamino          #+#    #+#             */
-/*   Updated: 2023/11/04 14:44:00 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:22:22 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,24 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "get_next_line.h"
+
+char	*ft_strdup(const char *s1)
+{
+	char	*pointer;
+	int		i;
+
+	pointer = (char *)malloc(ft_strlen(s1) + 1);
+	if (pointer == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		pointer[i] = s1[i];
+		++i;
+	}
+	pointer[i] = '\0';
+	return (pointer);
+}
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -82,15 +100,15 @@ char	*get_next_line(int fd)
 		if (!read_str)
 			return (NULL);
 		str = ft_strjoin(str, read_str);
-		free(read_str);
 	}
 	linea = get_all_line(str);
 	str = reduce_str(str);
-	if (!str)
+	if (!linea || !str)
 		free(str);
+	free(read_str);
 	return (linea);
 }
-/*
+
 void leaks(void) { system("leaks -q gnl"); }
 
 int	main(void)
@@ -110,4 +128,4 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
-}*/
+}
