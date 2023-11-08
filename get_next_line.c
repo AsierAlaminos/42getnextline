@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:58:48 by aalamino          #+#    #+#             */
-/*   Updated: 2023/11/04 17:22:22 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:20:38 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "get_next_line.h"
-
-char	*ft_strdup(const char *s1)
-{
-	char	*pointer;
-	int		i;
-
-	pointer = (char *)malloc(ft_strlen(s1) + 1);
-	if (pointer == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
-	{
-		pointer[i] = s1[i];
-		++i;
-	}
-	pointer[i] = '\0';
-	return (pointer);
-}
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -108,24 +90,24 @@ char	*get_next_line(int fd)
 	free(read_str);
 	return (linea);
 }
-
+/*
 void leaks(void) { system("leaks -q gnl"); }
 
 int	main(void)
 {
-	char	*str;
+	//char	*str;
 	int		i;
-	int		fd = open("./multiple_nl.txt", O_RDWR);
+	int		fd = open("./41_no_nl", O_RDWR);
 
 	atexit(leaks);
 	i = 0;
-	while (i < 6){
+	while (i < 2){
 		//printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
-		str = get_next_line(fd);
-		//get_next_line(fd);
-		printf("\ntexto: |%s|\n", str);
+		//str = get_next_line(fd);
+		get_next_line(fd);
+		//printf("\ntexto: |%s|\n", str);
 		++i;
 	}
 	close(fd);
 	return (0);
-}
+}*/
