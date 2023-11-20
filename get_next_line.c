@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:58:48 by aalamino          #+#    #+#             */
-/*   Updated: 2023/11/08 17:20:38 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:45:00 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,24 +90,35 @@ char	*get_next_line(int fd)
 	free(read_str);
 	return (linea);
 }
-/*
+
 void leaks(void) { system("leaks -q gnl"); }
 
 int	main(void)
 {
-	//char	*str;
+	char	*str;
 	int		i;
-	int		fd = open("./41_no_nl", O_RDWR);
+	int		fd = open("./read_error.txt", O_RDWR);
 
 	atexit(leaks);
 	i = 0;
 	while (i < 2){
-		//printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
-		//str = get_next_line(fd);
-		get_next_line(fd);
-		//printf("\ntexto: |%s|\n", str);
+		printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
+		str = get_next_line(fd);
+		//get_next_line(fd);
+		printf("\ntexto: |%s|\n", str);
 		++i;
 	}
 	close(fd);
+	fd = open("./read_error.txt", O_RDWR);
+	i = 0;
+	while (i < 5){
+		printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
+		str = get_next_line(fd);
+		//get_next_line(fd);
+		printf("\ntexto: |%s|\n", str);
+		++i;
+	}
+	free(str);
+	close(fd);
 	return (0);
-}*/
+}
