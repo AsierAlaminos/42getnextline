@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:02:03 by aalamino          #+#    #+#             */
-/*   Updated: 2023/11/20 17:33:51 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:55:43 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	int		j;
 
-	pointer = calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	pointer = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
 	if (!pointer)
-		return (NULL);
+		return (liberar(s1));
 	i = 0;
 	while (s1[i] != '\0')
 	{
@@ -86,7 +86,7 @@ char	*get_all_line(char *str)
 		i++;
 	temp = (char *)malloc(i + 2);
 	if (!temp)
-		return (NULL);
+		return (liberar(temp));
 	j = 0;
 	while (j < i)
 	{
@@ -106,13 +106,15 @@ char	*reduce_str(char *str)
 	int		j;
 
 	i = 0;
+	if (!str)
+		return (NULL);
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
 	if (str[i] == '\0')
-		return (NULL);
+		return (liberar(str));
 	if (str[0] == '\0' || (str[i] == '\n' && str[i + 1] == '\0'))
-		return (NULL);
-	temp = calloc(ft_strlen(str) - i + 1, sizeof(char));
+		return (liberar(str));
+	temp = ft_calloc(ft_strlen(str) - i + 1, sizeof(char));
 	i++;
 	j = 0;
 	while (str[i] != '\0')

@@ -6,7 +6,7 @@
 /*   By: aalamino <aalamino@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:06:07 by asmus             #+#    #+#             */
-/*   Updated: 2023/11/20 17:41:37 by aalamino         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:19:31 by aalamino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ size_t	ft_strlen(const char *s);
 char	*reduce_str(char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
+char	*liberar(char *pointer);
 
 #endif
