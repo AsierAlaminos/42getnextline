@@ -101,25 +101,3 @@ char	*get_next_line(int fd)
 	free(read_str);
 	return (linea);
 }
-/*
-void leaks(void) { system("leaks -q gnl"); }
-
-int	main(void)
-{
-	char	*str;
-	int		i;
-	//int		fd = open("./empty", O_RDWR);
-
-	atexit(leaks);
-
-	i = 0;
-	while (i < 2)
-	{
-		printf("\n++++++++++++++++++++++++++++\ni: %d\n", i);
-		str = get_next_line(-1);
-		//get_next_line(fd);
-		printf("\ntexto: |%s|\n", str);
-		i++;
-	}
-	return (0);
-}*/
