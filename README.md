@@ -1,6 +1,6 @@
 ![42 Madrid](https://www.42madrid.com/wp-content/uploads/2019/11/logo-header@2x.png)
 
-# 42getnextline ![Static Badge](https://img.shields.io/badge/status-finish-green)
+# 42getnextline ![Static Badge](https://img.shields.io/badge/status-finish-00cc03)
 
 Este es mi proyecto get_next_line de 42Madrid
 
